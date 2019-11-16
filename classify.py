@@ -1,7 +1,6 @@
 # USAGE
 # python classify.py --model road.model --labelbin lb.pickle --image examples/car_counter1.jpg
 
-# import the necessary packages
 from keras.preprocessing.image import img_to_array
 from keras.models import load_model
 import numpy as np
@@ -10,7 +9,7 @@ import imutils
 import pickle
 import cv2
 import os
-# construct the argument parse and parse the arguments
+
 ap = argparse.ArgumentParser()
 ap.add_argument("-m", "--model", required=True,
                 help="path to trained model model")
@@ -45,9 +44,6 @@ proba = model.predict(image)[0]
 idx = np.argmax(proba)
 label = lb.classes_[idx]
 
-# we'll mark our prediction as "correct" of the input image filename
-# contains the predicted label text (obviously this makes the
-# assumption that you have named your testing image files this way)
 filename = args["image"][args["image"].rfind(os.path.sep) + 1:]
 correct = "correct" if filename.rfind(label) != -1 else "incorrect"
 
