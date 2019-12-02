@@ -4,7 +4,7 @@ import math as mt
 import numpy as np
 
 print("\nAll of the rotation value is based on left-hand system\n")
-x_ratio = input("x_ration(radians)-Raw")#raw
+x_ratio = input("x_ration(radians)-Roll")#roll
 z_ratio = input("z_ration(radians)-Pitch")#pitch
 y_ratio = input("y_ration(radians)-Yaw")#yaw
 x_ratio = mt.radians(float(x_ratio))
