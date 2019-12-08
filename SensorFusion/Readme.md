@@ -4,6 +4,7 @@
 
 用于实现激光雷达和毫米波雷达的数据读取
 
+###Rewrites @知乎:陈光 融合算法
 
 
 ### 目录结构
@@ -11,28 +12,28 @@
 ```
 多传感器融合的代码目录结构如下所示：
 |___SensorFusion
-    |___bin 代码编译后的可执行文件存放目录
-    |___build 代码编译时的过程文件存放处
+    |___algorithims 算法集成
+    |___interface 枚举类型定义
+    |___main 主程序目录
     |___data 传感器融合的输入数据
-    |___src 传感器融合的源代码
-    |___build.sh 编译脚本
-    |___CMakeLists.txt 组建工程的CMake文件
+    |___BUILD
+    |___WORKSPACE
     |___LICENSE Udacity的License
     |___Reame.md 使用说明
 ```
 
 ### 使用方法
-
+(安装bazel, 并且请先将Eigen Library放在/usr/local/include/:参考:<https://www.codeleading.com/article/55692372926/> )
 系统
-Linux Ubuntu 16.04
+Linux Ubuntu xxx
 
-编译
-$ bash build.sh
 
-运行
-$ cd bin
-$ ./SensorFusion ../data/sample-laser-radar-measurement-data-2.txt
-
+###方法1:编译然后执行
+进入WORKSPACE目录
+$ bazel build //main:excute_cpp
+$ bazel-bin/main/excute_cpp
+###方法2:直接运行(已经编译好了)
+$ bazel-bin/main/excute_cpp 
 
 
 ### 链接
