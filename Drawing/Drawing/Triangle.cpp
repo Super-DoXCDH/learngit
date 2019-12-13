@@ -3,11 +3,6 @@
 
 
 IMPLEMENT_SERIAL(CTriangle, CObject, 1)//实现类WSquare的序列化，指定版本为1
-CTriangle::CTriangle()
-{
-	Type = (ElementType)4;//图元类型
-	Length = 100;
-}
 
 CTriangle::CTriangle(int x, int y, int length)
 {

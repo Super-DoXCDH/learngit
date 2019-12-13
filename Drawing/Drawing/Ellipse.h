@@ -6,7 +6,6 @@ protected:
 	int HRadius;//椭圆的水平半轴
 	int VRadius;//椭圆的垂直半轴
 public:
-	CEllipse();
 	CEllipse(int x, int y, int hr, int vr);
 	void Draw(CDC*pDC);
 	bool IsMatched(CPoint pnt);

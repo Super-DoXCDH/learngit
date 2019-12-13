@@ -5,7 +5,6 @@ class CCircle : public CShape
 protected:
 	int Radius;//Բ�İ뾶
 public:
-	CCircle();
 	CCircle(int x, int y, int r);
 	void Draw(CDC*pDC);
 	bool IsMatched(CPoint pnt);

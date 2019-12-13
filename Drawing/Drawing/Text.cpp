@@ -2,15 +2,6 @@
 #include "Text.h"
 
 IMPLEMENT_SERIAL(CText, CObject, 1)//实现类WText的序列化，指定版本为1
-CText::CText()
-{
-	LOGFONT logfont;
-	lstrcpy(logfont.lfFaceName, _T("楷体_GB2312"));
-	logfont.lfWeight = 700;
-	logfont.lfWidth = 40;
-	logfont.lfHeight = 70;
-	logfont.lfEscapement = 0;//默认为0度
-}
 
 CText::CText(int x, int y, CString content)
 {

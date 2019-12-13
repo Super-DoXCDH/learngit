@@ -6,7 +6,6 @@ protected:
 	CString Content;//文本的内容
 					//int Angle;//文本的旋转角度
 public:
-	CText();
 	CText(int x, int y, CString content);
 	void Draw(CDC* pDC);//绘制文本函数
 	bool IsMatched(CPoint pnt);
