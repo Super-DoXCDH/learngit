@@ -14,6 +14,7 @@ class CSquare : public CShape
 protected:
 	int width;//正方形的宽
 public:
+	CSquare();
 	CSquare(int x, int y, int width);
 	void Draw(CDC*pDC);
 	bool IsMatched(CPoint pnt);

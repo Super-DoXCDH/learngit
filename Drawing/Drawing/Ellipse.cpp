@@ -2,6 +2,12 @@
 #include "Ellipse.h"
 
 IMPLEMENT_SERIAL(CEllipse, CObject, 1)//实现类WSquare的序列化，指定版本为1
+CEllipse::CEllipse()
+{
+	Type = (ElementType)4;//图元类型
+	HRadius = 200;//默认椭圆水平半轴为200
+	VRadius = 100;//默认椭圆垂直半轴为100
+}
 
 CEllipse::CEllipse(int x, int y, int hr, int vr)
 {

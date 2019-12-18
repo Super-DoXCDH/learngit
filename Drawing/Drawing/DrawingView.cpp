@@ -202,7 +202,6 @@ void CDrawingView::OnLButtonDown(UINT nFlags, CPoint point)
 				CText *p = NULL;
 				CString content = dlg.m_TextContent;
 				p = new CText(pntLogical.x, pntLogical.y, content);
-
 				p->Angle = dlg.m_Angle;
 				p->BorderWidth = dlg.m_LineWidth;
 				p->BorderType = dlg.m_nLineTypeIndex;
@@ -287,6 +286,7 @@ void CDrawingView::OnLButtonDown(UINT nFlags, CPoint point)
 				if (dlg.DoModal() == IDOK)
 				{
 					//利用改了以后对话框中图元的属性更新到文档图元数组的对象中
+					//共有属性修改，如果修改非共有属性则要每个单独考虑
 					p->OrgX = dlg.m_ShapeX;
 					p->OrgY = dlg.m_ShapeY;
 
@@ -326,7 +326,8 @@ void CDrawingView::OnRButtonDblClk(UINT nFlags, CPoint point)
 		p = (CShape*)pDoc->m_Elements[i];
 		if (p->IsMatched(pntLogical))
 		{
-			AfxMessageBox(L"你是否要删除？");
+			AfxMessageBox(L"删除图元");
+
 			pDoc->m_Elements.RemoveAt(i);
 		}
 	}

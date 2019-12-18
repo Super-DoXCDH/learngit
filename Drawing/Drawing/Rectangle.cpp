@@ -4,6 +4,13 @@
 
 IMPLEMENT_SERIAL(CRectangle, CObject, 1)//实现类WSquare的序列化，指定版本为1
 
+CRectangle::CRectangle()
+{
+	Type = (ElementType)2;//图元类型
+	Width = 200;//默认图形宽度为200，高度为100
+	Height = 100;
+}
+
 CRectangle::CRectangle(int x, int y, int w, int h)
 {
 	Type = (ElementType)2;//图元类型

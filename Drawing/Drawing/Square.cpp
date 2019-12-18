@@ -7,7 +7,7 @@ IMPLEMENT_SERIAL(CSquare, CObject, 1)//实现类WSquare的序列化，指定版本为1
 
 CSquare::CSquare()
 {
-	Type = (ElementType)0;//图元类型
+	Type = (ElementType)1;//图元类型
 	width = 100;//默认图形宽度为100
 }
 

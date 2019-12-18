@@ -2,6 +2,15 @@
 #include "Text.h"
 
 IMPLEMENT_SERIAL(CText, CObject, 1)//实现类WText的序列化，指定版本为1
+CText::CText()
+{
+	LOGFONT logfont;
+	lstrcpy(logfont.lfFaceName, _T("楷体_GB2312"));
+	logfont.lfWeight = 700;
+	logfont.lfWidth = 40;
+	logfont.lfHeight = 70;
+	logfont.lfEscapement = 0;//默认为0度
+}
 
 CText::CText(int x, int y, CString content)
 {
@@ -38,6 +47,12 @@ void CText::Draw(CDC * pDC)
 
 bool CText::IsMatched(CPoint pnt)
 {
+	int Width = 400;
+	int Height = 700;
+	//if (((OrgX - Width) <= pnt.x) && (pnt.x <= (OrgX + Width / 2)) && ((OrgY - Height / 2) <= pnt.y) && (pnt.y <= (OrgY + Height / 2)))
+	if ((pnt.x >= OrgX) && (pnt.x <= (OrgX+Width)) && (pnt.y >= OrgY) && (pnt.y <= (OrgY+Height)))
+		return true;
+	else
 		return false;
 }
 

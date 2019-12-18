@@ -3,6 +3,11 @@
 
 
 IMPLEMENT_SERIAL(CCircle, CObject, 1)//实现类WSquare的序列化，指定版本为1
+CCircle::CCircle()
+{
+	Type = (ElementType)3;//图元类型
+	Radius = 100;//默认半径为100
+}
 
 CCircle::CCircle(int x, int y, int r)
 {

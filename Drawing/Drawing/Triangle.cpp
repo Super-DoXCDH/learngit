@@ -1,8 +1,13 @@
 #include "stdafx.h"
 #include "Triangle.h"
-
+#include <math.h>
 
 IMPLEMENT_SERIAL(CTriangle, CObject, 1)//实现类WSquare的序列化，指定版本为1
+CTriangle::CTriangle()
+{
+	Type = (ElementType)5;//图元类型
+	Length = 100;
+}
 
 CTriangle::CTriangle(int x, int y, int length)
 {
@@ -41,7 +46,10 @@ bool CTriangle::IsMatched(CPoint pnt)
 	double x1 = OrgX, y1 = OrgY + Length / sqrt(3);
 	double x2 = OrgX - Length / 2, y2 = OrgY - Length / (2 * sqrt(3));
 	double x3 = OrgX + Length / 2, y3 = OrgY - Length / (2 * sqrt(3));
-	return false;
+	if ( (y1 >= pnt.y) && (x2 <= pnt.x) && (y2 <= pnt.y) && (x3 >= pnt.x) && (y3 <= pnt.y))
+		return true;
+	else
+	    return false;
 }
 
 void CTriangle::Serialize(CArchive & ar)

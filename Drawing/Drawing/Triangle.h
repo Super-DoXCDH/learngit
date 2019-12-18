@@ -8,7 +8,7 @@ class CTriangle : public CShape
 protected:
 	int Length;//正三角形的边长
 public:
-
+	CTriangle();
 	CTriangle(int x, int y, int length);
 	void Draw(CDC*pDC);
 	bool IsMatched(CPoint pnt);

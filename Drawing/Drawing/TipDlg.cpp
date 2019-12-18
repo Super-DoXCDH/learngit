@@ -28,6 +28,7 @@ CTipDlg::~CTipDlg()
 {
 }
 
+// 连接变量
 void CTipDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
@@ -43,7 +44,7 @@ void CTipDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_LIST2, m_FillType);
 	DDX_Control(pDX, IDC_LIST1, m_LineType);
 	DDX_Text(pDX, IDC_EDIT7, m_TextContent);
-	DDX_Text(pDX, IDC_STATIC14, m_Angle);
+	DDX_Text(pDX, IDC_EDIT5, m_Angle);
 
 }
 
@@ -123,31 +124,37 @@ void CTipDlg::OnBnClickedFillcolor()
 
 void CTipDlg::OnCbnSelchangeCombo()
 {
-	// TODO: 在此添加控件通知处理程序代码
+	// TODO: 在此添加控件通知处理程序代码  返回的下标不是文本
 	int nIndex = m_ComboxType.GetCurSel();
 	if (nIndex != 2)
 	{
 		CStatic* pStatic1 = (CStatic*)GetDlgItem(IDC_STATIC4);
 		pStatic1->ShowWindow(SW_HIDE);
+
 		CEdit* pEdit1 = (CEdit*)GetDlgItem(IDC_EDIT7);
 		pEdit1->ShowWindow(SW_HIDE);
 
 		pStatic1 = (CStatic*)GetDlgItem(IDC_STATIC14);
-		pStatic1->ShowWindow(SW_HIDE);
-		pEdit1 = (CEdit*)GetDlgItem(IDC_STATIC14);
-		pEdit1->ShowWindow(SW_HIDE);
+		pStatic1->ShowWindow(SW_HIDE);	
+
+		CEdit* pEdit2 = (CEdit*)GetDlgItem(IDC_EDIT5);
+		pEdit2->ShowWindow(SW_HIDE);
+
 	}
 	else
 	{
 		CStatic* pStatic1 = (CStatic*)GetDlgItem(IDC_STATIC4);
 		pStatic1->ShowWindow(SW_SHOW);
+
 		CEdit* pEdit1 = (CEdit*)GetDlgItem(IDC_EDIT7);
 		pEdit1->ShowWindow(SW_SHOW);
 
-		CStatic* pStatic2 = (CStatic*)GetDlgItem(IDC_STATIC14);
-		pStatic2->ShowWindow(SW_SHOW);
-		CEdit* pEdit2 = (CEdit*)GetDlgItem(IDC_STATIC14);
+		pStatic1 = (CStatic*)GetDlgItem(IDC_STATIC14);
+		pStatic1->ShowWindow(SW_SHOW);
+
+		CEdit* pEdit2 = (CEdit*)GetDlgItem(IDC_EDIT5);
 		pEdit2->ShowWindow(SW_SHOW);
+	
 	}
 }
 
@@ -161,24 +168,4 @@ void CTipDlg::OnBnClickedOk()
 	CDialogEx::OnOK();
 }
 
-
-void CTipDlg::ShowMsg() {
-
-	GetDlgItem(IDC_STATIC11)->SetWindowText(L"图元类型");
-	GetDlgItem(IDC_STATIC10)->SetWindowText(L"形状参数");
-	GetDlgItem(IDC_STATIC3)->SetWindowText(L"原点X");
-	GetDlgItem(IDC_STATIC1)->SetWindowText(L"原点Y");
-	GetDlgItem(IDC_STATIC2)->SetWindowText(L"宽度");
-	GetDlgItem(IDC_STATIC5)->SetWindowText(L"高度");
-	GetDlgItem(IDC_STATIC4)->SetWindowText(L"文本");
-	GetDlgItem(IDC_STATIC14)->SetWindowText(L"角度");
-	GetDlgItem(IDC_STATIC22)->SetWindowText(L"边框风格");
-	GetDlgItem(IDC_STATIC6)->SetWindowText(L"线宽");
-	GetDlgItem(IDC_STATIC12)->SetWindowText(L"线色");
-	GetDlgItem(IDC_STATIC7)->SetWindowText(L"线型");
-	GetDlgItem(IDC_STATIC8)->SetWindowText(L"填充风格");
-	GetDlgItem(IDC_STATIC9)->SetWindowText(L"填充风格");
-	GetDlgItem(IDC_STATIC13)->SetWindowText(L"填充色");
-
-}
 

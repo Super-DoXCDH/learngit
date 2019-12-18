@@ -23,7 +23,7 @@ protected:
 	afx_msg void OnBnClickedFillcolor();
 	afx_msg void OnCbnSelchangeCombo();
 	afx_msg void OnBnClickedOk();
-	virtual void CTipDlg::ShowMsg();
+
 public:
 	int m_ShapeX;
 	int m_ShapeY;
@@ -49,5 +49,5 @@ public:
 
 	CString m_TextContent;
 	int m_Angle;
-	afx_msg void OnStnClickedStatic7();
+
 };
