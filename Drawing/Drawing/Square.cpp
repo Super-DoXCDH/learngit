@@ -3,17 +3,17 @@
 #include "Square.h"
 #include "Shape.h"
 
-IMPLEMENT_SERIAL(CSquare, CObject, 1)//ÊµÏÖÀàWSquareµÄĞòÁĞ»¯£¬Ö¸¶¨°æ±¾Îª1
+IMPLEMENT_SERIAL(CSquare, CObject, 1)//å®ç°ç±»CSquareçš„åºåˆ—åŒ–ï¼ŒæŒ‡å®šç‰ˆæœ¬ä¸º1
 
 CSquare::CSquare()
 {
-	Type = (ElementType)1;//Í¼ÔªÀàĞÍ
-	width = 100;//Ä¬ÈÏÍ¼ĞÎ¿í¶ÈÎª100
+	Type = (ElementType)1;//å›¾å…ƒç±»å‹
+	width = 100;//é»˜è®¤å›¾å½¢å®½åº¦ä¸º100
 }
 
 CSquare::CSquare(int x, int y, int w)
 {
-	Type = (ElementType)1;//Í¼ÔªÀàĞÍ
+	Type = (ElementType)1;//å›¾å…ƒç±»å‹
 	OrgX = x;
 	OrgY = y;
 	width = w;
@@ -21,20 +21,20 @@ CSquare::CSquare(int x, int y, int w)
 
 void CSquare::Draw(CDC* pDC)
 {
-	//´´½¨»­±Ê¼°ÓÃÀ´±£´æÔ­»­±ÊµÄÖ¸Õë
+	//åˆ›å»ºç”»ç¬”åŠç”¨æ¥ä¿å­˜åŸç”»ç¬”çš„æŒ‡é’ˆ
 	CPen pen, *pOldPen;
 	pen.CreatePen(BorderType, BorderWidth, BorderColor);
 	pOldPen = (CPen*)pDC->SelectObject(&pen);
 
-	//´´½¨Ë¢×Ó¼°ÓÃÀ´±£´æÔ­Ë¢×ÓµÄÖ¸Õë
+	//åˆ›å»ºåˆ·å­åŠç”¨æ¥ä¿å­˜åŸåˆ·å­çš„æŒ‡é’ˆ
 	CBrush brush, *pOldBrush;
 	brush.CreateHatchBrush(FillType, FillColor);
 	pOldBrush = (CBrush*)pDC->SelectObject(&brush);
 
-	//»æÖÆÍ¼ĞÎ
+	//ç»˜åˆ¶å›¾å½¢
 	pDC->Rectangle(OrgX - width / 2, OrgY + width / 2, OrgX + width / 2, OrgY - width / 2);
 
-	//Ê¹ÓÃµ±Ç°»­±ÊºÍË¢×Ó
+	//ä½¿ç”¨å½“å‰ç”»ç¬”å’Œåˆ·å­
 	pDC->SelectObject(pOldPen);
 	pDC->SelectObject(pOldBrush);
 }
@@ -51,7 +51,7 @@ void CSquare::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
-		//±£´æÎÄ¼ş
+		//ä¿å­˜æ–‡ä»¶
 		ar << (WORD)Type;
 		ar << OrgX << OrgY;
 		ar << BorderColor << BorderType << BorderWidth;
@@ -60,7 +60,7 @@ void CSquare::Serialize(CArchive& ar)
 	}
 	else
 	{
-		//¶ÁÈ¡ÎÄ¼ş
+		//è¯»å–æ–‡ä»¶
 		WORD w;
 		ar >> w;
 		Type = (ElementType)w;
