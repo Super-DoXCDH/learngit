@@ -91,24 +91,23 @@
     ```c++
     const Widget A(lhs,rhs);//A is const object
     ...
-    const Widger& operator*(const Widget& rhs)
-        					const;//const fc				
+    const Widger& operator*(const Widget& rhs)const;//const fc				
     ```
-
-  - **2.const成员函数不能修改对象的数据成员，const对象的成员变量不可以修改（mutable修饰的数据成员除外）**
-
-  - ![image-20200507151558894](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200507151558894.png)
-
-  - **两个成员函数如果只是常量性不同，是可以被重载的**
-
-    ```c++
-    const char& operator[](std::size_t position) 						const;
+    
+- **2.const成员函数不能修改对象的数据成员，const对象的成员变量不可以修改（mutable修饰的数据成员除外）**
+  
+- ![image-20200507151558894](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200507151558894.png)
+  
+- **两个成员函数如果只是常量性不同，是可以被重载的**
+  
+  ```c++
+    const char& operator[](std::size_t position)const;
     char& operator[](std::size_t position);
     ```
-
-  - **当const和non-const成员函数有着实质等价的实现时，令non-const版本调用const版本避免代码重复,反之不能！**
-
-    ```c++
+  
+- **当const和non-const成员函数有着实质等价的实现时，令non-const版本调用const版本避免代码重复,反之不能！**
+  
+  ```c++
     char& operator[](std::size_t position)
     {
         return 
