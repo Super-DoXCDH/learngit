@@ -1,8 +1,12 @@
----
-typora-copy-images-to: upload
----
 
-# 《Effective C++》学习笔记
+
+# :triangular_flag_on_post:《Effective C++》学习笔记 
+
+:runner:记录生活，热爱生活！
+
+[toc] 
+
+---------------
 
 ## 0.让自己习惯C++
 
@@ -100,7 +104,7 @@ typora-copy-images-to: upload
   
 - **2.const成员函数不能修改对象的数据成员，const对象的成员变量不可以修改（mutable修饰的数据成员除外）**
   
-- ![image-20200507151558894](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200507151558894.png)
+- <img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200507151558894.png" alt="image-20200507151558894" style="zoom:80%;" />
   
 - **两个成员函数如果只是常量性不同，是可以被重载的**
   
@@ -161,7 +165,7 @@ Know what functions C++ silently writes and calls.
 Explicitly disallow the use of compile-generated functions you do not want.
 
 - **将默认生成的成员函数声明为private而且故意不实现他们**，或者使用像**Uncopyable**这样的base class(依据是：基类声明coping函数为private则其派生类拒绝生成coping函数)
-- ![image-20200507212838021](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200507212838021.png)
+- <img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200507212838021.png" alt="image-20200507212838021" style="zoom:80%;" />
 
 ## 7.为多态基类声明virtual析构函数
 
@@ -178,7 +182,7 @@ Prevent exceptions from leaving destructors.
 - 析构函数绝对不能抛出异常；如果一个被析构函数调用的函数可能抛出异常，析构函数应该捕捉任何异常，然后吞下它们（不传播）或结束程序
 - 如果客户需要对某个操作函数运行期间抛出的异常做出反应，那么类应该提供一个普通函数（而非在析构函数中）执行该操作
 - <img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200507220609369.png" alt="image-20200507220609369" style="zoom: 80%;" />
-
+- 
 - 因为析构函数吐出异常就是危险！带来“过早结束”或“不明确行为”的发生！
 
 ## 9.决不在构造和析构过程中调用virtual函数
@@ -188,10 +192,10 @@ Never call virtual functions during construction or destruction.
 - **base class构造期间 virtual函数绝不会下降到derived classes阶层；**基类构造函数优先派生类被执行完成！
 - base class构造或析构函数执行时derived class的成员变量尚未初始化，如果调用的virtual函数下降到derived class阶层，必定导致使用的成员变量未初始化 
 - 在derived class的base class构造期间，对象的类型是base class，不会成为一个derived class对象
-- ![image-20200507224329916](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200507224329916.png)
+- <img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200507224329916.png" alt="image-20200507224329916" style="zoom:80%;" />
 - **令次函数为static，也就不存在意外指向“初期未成熟的派生类对象内未被初始化的成员变量”**
 
-## 10：令operator= 返回一个reference to *this
+## 10.令operator= 返回一个reference to *this
 
 - 为了实现“连锁赋值”等
 - 为operator*返回一个const reference to *this [防止a * b =c]
@@ -200,4 +204,138 @@ Never call virtual functions during construction or destruction.
 
 Handle assignment to  self in operator=.
 
-- 
+- 加一个“证同测试”使具有“自我赋值安全性”
+  精心安排的语句可以使代码具有“异常安全性”（自动获得“自我赋值安全性”）：在复制构造之前别删除原指针
+
+  ```c++
+  if (this == &rhs) return *this;//别用*this == rhs，效率太低！
+  ```
+
+- 另一种替代方案是“copy and swap”技术
+
+  ```c++
+  Widget& Widget::operator=(const Widget& rhs)
+  {
+      Widget temp(rhs);
+      swap(temp);
+      return *this;
+  }
+  ```
+
+- 注：**将copying动作从函数本体移至函数参数构造阶段牺牲了清晰性，有时却可生成更高效的代码**
+
+  ```c++
+  Widget& Widget::operator=(Widget rhs)
+  {
+      swap(rhs);
+      return *this;
+  }
+  ```
+
+## 12.复制对象时勿忘其每一个成分
+
+Copy all parts of an object.
+
+- 复制所有的local成员变量以及所有base class成分
+
+  ```c++
+  Derived::Derived(param):Base(param),data_D(param){}
+  
+  Derived& Derived::operator=(const Derived& rhs) 
+  {
+      Base::operator=(rhs);
+      ...//派生类的赋值
+      return *this;
+  }
+  ```
+
+- 不要尝试以一个copying函数实现另一个copying函数。应将共同机能放进第三个函数中并由它们共同调用
+
+## 13.以对象管理资源
+
+Use objects to manage resources.
+
+**为了防止资源泄漏，请使用RAII对象，在构造函数里面获得资源，并在析构函数里面释放资源** 
+
+- [x] 下面都是“类指针对象”：重载了有指针行为的函数
+
+- **auto_ptr**：被销毁会自动删除它所指之物，复制所得的指针将获得资源的唯一拥有权，可以控制权移交
+- scoped_ptr:防拷贝指针
+- shared_ptr:引用计数指针
+- weak_ptr:弱指针与shared_ptr类似，不同点是不能修改资源引用技术，也就是没有资源管理权,
+  - 用来辅组shared_ptr解决循环引用问题！
+- **引用计数型智慧指针（RCSP）**：持续追踪多少个指针指向该资源，无人指向他时自动删除该资源
+
+```c++
+#include<memory>
+std::shared_ptr<T> ptr(new T(init_param));
+```
+
+
+
+**注：**<img src="image-20200508185023724.png" alt="image-20200508185023724" style="zoom:80%;" />
+
+## 14.在资源管理类中小心coping行为
+
+Think carefully about copying behavior in resource-managing classes.
+
+一般资源管理类复制时可以选择以下做法： 
+
+- 禁止复制（复制不合理）private inheritance Uncopyable or set coping fc private
+- “引用计数法”（使用tr1::shared_ptr指定“删除器”阻止引用次数为0时的删除行为）
+- 复制底层资源（“深度拷贝”）
+- 转移底部资源的拥有权（auto_ptr）
+
+## 15.在资源管理类中提供对原始资源的访问
+
+Provide access to raw resources in resource-managing classes.
+
+- get成员函数实现**显式转换**（安全，受欢迎）
+
+  ```C++
+  T* get() const {return this->ptr;}
+  ```
+
+- **隐式转换函数**operator算子（方便）：
+
+  ```c++
+  class Tmp{
+  public:
+      ...
+      operator TmpConvertType() const  //隐式转换函数
+      { return t; }
+      ...
+  private:
+      TmpConvertType t;
+  };
+  ...
+  Tmp f1;
+  Tmp f2 = f1;//此处会用operator算子执行隐式转换，返回f1的t给f2的copy构造函数
+  //operator算子的隐式类型转换，使用-当前对象去生成另一个类型的对象-（正好与构造函数型相反），这种转换必须有operator算子的支持。
+  ```
+
+## 16.成对使用new和delete时要采用相同形式
+
+Use the same form in corresponding uses of new and delete.
+
+- new和delete对应，new[ ]和delete[ ]对应
+
+**注：**[new与malloc的区别](https://www.cnblogs.com/shilinnpu/p/8945637.html)
+
+## 17.以独立语句将newed对象置于智能指针。
+
+Store newed objects in smart pointers in standalone statements.
+
+- 如果不这样做，一旦抛出异常，有可能导致难以察觉的资源泄漏
+
+```c++
+processWidget(std::shared_ptr<Widget> pw, int priority);
+...
+processWidget(std::shared_ptr<Widget>(new Widget(param)),priority());
+//不支持隐式构造，所以第一个参数不能是new Widget
+//执行顺序有很大弹性！容易造成内存泄漏
+//推荐以下写法
+std::shared_ptr<Widget> pw(new Widget(param));
+processWidget(pw,priority());
+```
+
