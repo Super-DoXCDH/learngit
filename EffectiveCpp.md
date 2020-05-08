@@ -1,3 +1,7 @@
+---
+typora-copy-images-to: upload
+---
+
 # 《Effective C++》学习笔记
 
 ## 0.让自己习惯C++
@@ -93,17 +97,17 @@
     ...
     const Widger& operator*(const Widget& rhs)const;//const fc				
     ```
-    
+  
 - **2.const成员函数不能修改对象的数据成员，const对象的成员变量不可以修改（mutable修饰的数据成员除外）**
   
-- ![image-20200507151558894](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200507151558894.png)
+- ![image-20200507151558894](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200507151558894.png)
   
 - **两个成员函数如果只是常量性不同，是可以被重载的**
   
   ```c++
     const char& operator[](std::size_t position)const;
     char& operator[](std::size_t position);
-    ```
+  ```
   
 - **当const和non-const成员函数有着实质等价的实现时，令non-const版本调用const版本避免代码重复,反之不能！**
   
@@ -112,10 +116,10 @@
     {
         return 
             const_cast<char&>(
-            	static_cast<const TB&>(*this)					[position]
+            	static_cast<const TB&>(*this)[position]
         	);
     }
-    ```
+  ```
 
 **注：**[C++强制类型转换](https://www.cnblogs.com/songhe364826110/p/11521589.html)
 
@@ -157,7 +161,7 @@ Know what functions C++ silently writes and calls.
 Explicitly disallow the use of compile-generated functions you do not want.
 
 - **将默认生成的成员函数声明为private而且故意不实现他们**，或者使用像**Uncopyable**这样的base class(依据是：基类声明coping函数为private则其派生类拒绝生成coping函数)
-- ![image-20200507212838021](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200507212838021.png)
+- ![image-20200507212838021](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200507212838021.png)
 
 ## 7.为多态基类声明virtual析构函数
 
@@ -173,7 +177,7 @@ Prevent exceptions from leaving destructors.
 
 - 析构函数绝对不能抛出异常；如果一个被析构函数调用的函数可能抛出异常，析构函数应该捕捉任何异常，然后吞下它们（不传播）或结束程序
 - 如果客户需要对某个操作函数运行期间抛出的异常做出反应，那么类应该提供一个普通函数（而非在析构函数中）执行该操作
-- <img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200507220609369.png" alt="image-20200507220609369" style="zoom: 80%;" />
+- <img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200507220609369.png" alt="image-20200507220609369" style="zoom: 80%;" />
 
 - 因为析构函数吐出异常就是危险！带来“过早结束”或“不明确行为”的发生！
 
@@ -184,11 +188,16 @@ Never call virtual functions during construction or destruction.
 - **base class构造期间 virtual函数绝不会下降到derived classes阶层；**基类构造函数优先派生类被执行完成！
 - base class构造或析构函数执行时derived class的成员变量尚未初始化，如果调用的virtual函数下降到derived class阶层，必定导致使用的成员变量未初始化 
 - 在derived class的base class构造期间，对象的类型是base class，不会成为一个derived class对象
-- ![image-20200507224329916](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200507224329916.png)
+- ![image-20200507224329916](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200507224329916.png)
 - **令次函数为static，也就不存在意外指向“初期未成熟的派生类对象内未被初始化的成员变量”**
 
 ## 10：令operator= 返回一个reference to *this
 
 - 为了实现“连锁赋值”等
-- 为operator*返回一个const reference to *this
+- 为operator*返回一个const reference to *this [防止a * b =c]
 
+## 11.在operator= 中处理“自我赋值”
+
+Handle assignment to  self in operator=.
+
+- 
