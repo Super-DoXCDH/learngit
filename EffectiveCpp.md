@@ -1,5 +1,3 @@
-c
-
 # :triangular_flag_on_post:《Effective C++》学习笔记 
 
 :runner:记录生活，热爱生活！
@@ -789,9 +787,9 @@ Avoid hiding inherited names.
 
 
 
-<img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200511202457552.png" alt="image-20200511202647854" style="zoom:80%;" />
+<img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200511202457552.png" alt="image-20200511202647854" style="zoom:80%;"/>
 
-<img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200511202647854.png" alt="image-20200511202457552" style="zoom:88%;" />
+<img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200511202647854.png" alt="image-20200511202457552" style="zoom:88%;"/>
 
 
 
@@ -891,15 +889,15 @@ Never redefine a function`s inherited default parameter value.
 
 - 当复合(composition) **这个术语有许多同义词，包括layering ( 分层)，containment(内含)， aggregation (聚合)和embedding (内嵌)。**发生于**应用域**内的对象之间，表现**has-a**的关系；
 
-  ><img src="image-20200512113340202.png" alt="image-20200512113340202" style="zoom:96%;" />
+  ><img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200512113340202.png" alt="image-20200512113340202" style="zoom:96%;" />
 
 - 当复合它发生于**实现域**内则是表现**is-implemented-in-terms-of**的关系
 
 - 注意list允许重复，但set不允许重复，所以只能用“has-a”
 
-  > ![image-20200512113352299](image-20200512113352299.png)
+  > ![image-20200512113352299](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200512113352299.png)
   >
-  > <img src="image-20200512113742506.png" alt="image-20200512113742506" style="zoom:92%;" />
+  > <img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200512135314772.png" alt="image-20200512113742506" style="zoom:92%;" />
 
 - 复合的意义和public继承完全不同
 
@@ -913,7 +911,7 @@ Use private inheritance judiciously.
 
 - 尽可能使用复合，必要时才使用private继承（当derived class想访问base class的protected成分时，或为了重新定义virtual函数时，还有造成EBO（empty base optimization）节省内存时才为必要）
 
-![image-20200512135314772](image-20200512135314772.png)
+![image-20200512135314772](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200512142449138.png)
 
 - private继承规则如下：
   - 编译器不会自动将一个derived class对象转换为一个base class对象，不是**is-a**
@@ -931,17 +929,17 @@ Use mutiple inheritance judiciously.
 
 - 多重继承可能从多个base class继承相同名称，也可能导致要命的“菱型(钻石型)多重继承”（base class被多次构造，可以使用virtual继承解决）
 
-![image-20200512142449138](image-20200512142449138.png)
+![image-20200512142449138](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200512143325941.png)
 
 - *使用virtual继承导致对象体积大，访问成员变量速度慢等问题*；因此，**非必要不要使用virtual bases，如果要使用，尽可能避免在其中放置数据**（相当于对virtual继承）构建空基优化（EBO)
 
-![image-20200512142603737](image-20200512142603737.png)
+![image-20200512142603737](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200512143420322.png)
 
 - 多重继承的一个正当用途是其中一个情节涉及“public继承某个interface class“，和”private继承某个协助实现的class“的两相组合，
 
-<img src="image-20200512143325941.png" alt="image-20200512143325941" style="zoom:99%;" />
+<img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200512113742506.png" alt="image-20200512143325941" style="zoom:99%;" />
 
-<img src="image-20200512143420322.png" alt="image-20200512143420322" style="zoom:100%;" />
+<img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200512142603737.png" alt="image-20200512143420322" style="zoom:100%;" />
 
 - 单一继承更受欢迎
   
@@ -1024,7 +1022,7 @@ Use member function templates to accept "all compatible types."
 
 - 请使用成员函数模版生成“可接受所有兼容类型”的函数
 
-![image-20200513141129330](image-20200513141129330.png)
+![image-20200513141129330](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200513151106145.png)
 
 ```c++
 temmplate<typename T>
@@ -1066,7 +1064,7 @@ public:
 
 - T与Y相同，泛化copy构造函数会被具现化为正常的copy构造函数（**允许同类型shared_ptr转换**）
 
-![image-20200513151106145](image-20200513151106145.png)
+![image-20200513151106145](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200513155454389.png)
 
 - 即使声明了“泛化拷贝构造函数”和“泛化的赋值操作符”，**仍然需要声明正常的拷贝构造函数和拷贝赋值操作符**（*泛化模板，不能阻止编译器生成默认的构造和赋值函数*）
 
@@ -1140,7 +1138,7 @@ iterator_traits通过特化版本可以提供希望支持的相关类型（如�
 
 > 继承关系：
 
-![image-20200513155454389](image-20200513155454389.png)
+![image-20200513155454389](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200513161907885.png)
 
 ```c++
 template<typename IterT, typename DistT>
@@ -1162,11 +1160,11 @@ void advance(IterT &iter, DistT d)              //上述函数并传递类型信
 }
 ```
 
-<img src="image-20200513161406142.png" alt="image-20200513161406142" style="zoom:110%;" />
+<img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200513162149346.png" alt="image-20200513161406142" style="zoom:110%;" />
 
 > **模板函数重载，替换if-else**
 
-![image-20200513161907885](image-20200513161907885.png)
+![image-20200513161907885](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200513141129330.png)
 
 ## 48：认识模板元编程
 
@@ -1180,7 +1178,7 @@ Be aware of template metaprogramming.
 
   - 计算阶乘：
 
-  <img src="image-20200513162149346.png" alt="image-20200513162149346" style="zoom:110%;">
+  <img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200513161406142.png" alt="image-20200513162149346" style="zoom:110%;">
 
 ## 49：了解new-handler的行为
 
@@ -1198,11 +1196,11 @@ Understand the bahavior of the new-handle.
   - (:sos:)
   - **NewHandleHodler可以保证set_new_handle"一次性"特性!**
 
-  <img src="image-20200513174823447.png" alt="image-20200513174823447" style="zoom:104.6%;" />
+  <img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200513192552219.png" alt="image-20200513174823447" style="zoom:104.6%;" />
 
-  <img src="image-20200513174416373.png" alt="image-20200513174416373" style="zoom:98.5%;" />
+  <img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200513174823447.png" alt="image-20200513174416373" style="zoom:98.5%;" />
 
-  ![image-20200513174112266](image-20200513174112266.png)
+  ![image-20200513174112266](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200513182035943.png)
 
 - **Nothrow（在无法分配足够内存时返回NULL即void 0）**是一个颇为局限的工具，它只适用于内存分配，后继的构造函数调用还是可能抛出异常
 
@@ -1245,6 +1243,6 @@ public:
 
 - 当你声明placement new和placement delete,请**确定继承体系不要无意识地遮掩了它们的正常版本**
 
-<img src="image-20200513192552219.png" alt="image-20200513192552219" style="zoom:94.6%;" />
+<img src="https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200513174416373.png" alt="image-20200513192552219" style="zoom:94.6%;" />
 
-![image-20200513182035943](image-20200513182035943.png)
+![image-20200513182035943](https://raw.githubusercontent.com/Super-DoXCDH/learngit/master/images/image-20200513174112266.png)
